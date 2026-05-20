@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Mary Hazel
+Cyber Handle: cyberblue01
+Score: 5/10
+Rating: Trainee
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{17}
+Q3: flag{192.168.1.10,192.168.1.5,10.0.0.5,203.0.113.50}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: flag{log_cleaning_started}
+Q8: flag{Phishing-Insider}
+Q9: Phishing Insider
+
+=== RESULT ===
+Status: TRAINING REQUIRED
