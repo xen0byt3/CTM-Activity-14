@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Roldmar Gulfo
+Cyber Handle: H4ckCr0w4
+Score: 4/10
+Rating: Trainee
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{10}
+Q3: sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p' messy.log | sort | uniq
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: sed -n '/FLAG/p' messy.log
+Q8: 
+Q9: flag{Phishing, Brute force}
+
+=== RESULT ===
+Status: TRAINING REQUIRED
