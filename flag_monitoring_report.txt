@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Christmark Barlam
+Cyber Handle: Genesis5020
+Score: 7/10
+Rating: Junior Analyst
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{17}
+Q3: flag{192.168.1.10,192.168.1.5,10.0.0.5,203.0.113.50,45.33.32.1}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: grep flag messy.log
+Q8: flag{OUSTER_OF_CORRUPT_OFFICIALS_AND_TRANSITION_GOVERNMENT_NEEDED}
+Q9:  flag{phishing_bruteforce_insideractivity}
+
+=== RESULT ===
+Status: NEEDS IMPROVEMENT

@@ -1,0 +1,154 @@
+=== SOC LOG MONITORING REPORT ===
+
+COMMAND: ls
+OUTPUT:
+messy.log
+----------------------------------------
+COMMAND: cat messy.log
+OUTPUT:
+[INFO] System started
+[WARNING] Failed password for root from 192.168.1.10
+Random text here
+Failed password for root from 192.168.1.10
+Accepted password for admin from 192.168.1.5
+ERROR: Failed password from 10.0.0.5
+User login OK
+Failed password from 10.0.0.5
+[ALERT] Failed password from 10.0.0.5
+Noise noise noise
+Accepted login from 203.0.113.50
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+#FLAG{log_cleaning_started}
+----------------------------------------
+COMMAND: sed '/INFO/d; /OK/d; /Random/d; /Noise/d; /^$/d' messy.log'
+OUTPUT:
+[WARNING] Failed password for root from 192.168.1.10
+Failed password for root from 192.168.1.10
+Accepted password for admin from 192.168.1.5
+ERROR: Failed password from 10.0.0.5
+Failed password from 10.0.0.5
+[ALERT] Failed password from 10.0.0.5
+Accepted login from 203.0.113.50
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+#FLAG{log_cleaning_started}
+----------------------------------------
+COMMAND: sed -n '/Failed password/p' messy.log
+OUTPUT:
+[WARNING] Failed password for root from 192.168.1.10
+Failed password for root from 192.168.1.10
+ERROR: Failed password from 10.0.0.5
+Failed password from 10.0.0.5
+[ALERT] Failed password from 10.0.0.5
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+Failed password from 203.0.113.50
+----------------------------------------
+COMMAND: sed -E 's/.*Failed password/[ALERT] Failed password/g' messy.log
+OUTPUT:
+[INFO] System started
+[ALERT] Failed password [ALERT] for root from 192.168.1.10
+Random text here
+[ALERT] Failed password [ALERT] for root from 192.168.1.10
+Accepted password for admin from 192.168.1.5
+[ALERT] Failed password [ALERT] from 10.0.0.5
+User login OK
+[ALERT] Failed password [ALERT] from 10.0.0.5
+[ALERT] Failed password [ALERT] from 10.0.0.5
+Noise noise noise
+Accepted login from 203.0.113.50
+[ALERT] Failed password [ALERT] from 203.0.113.50
+[ALERT] Failed password [ALERT] from 203.0.113.50
+[ALERT] Failed password [ALERT] from 203.0.113.50
+#FLAG{log_cleaning_started}
+----------------------------------------
+COMMAND:  sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*/\one/p' messy.log
+OUTPUT:
+192.168.1.10
+192.168.1.10
+192.168.1.5
+10.0.0.5
+10.0.0.5
+10.0.0.5
+203.0.113.50
+203.0.113.50
+203.0.113.50
+203.0.113.50
+----------------------------------------
+COMMAND: sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*/\one/p' messy.log | sort | uniq -c
+OUTPUT:
+2 192.168.1.10
+1 192.168.1.5
+3 10.0.0.5
+4 203.0.113.50
+----------------------------------------
+COMMAND:  sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*/\one/p' messy.log | sort | uniq -c | awk '$1 > 2'
+OUTPUT:
+3 10.0.0.5
+4 203.0.113.50
+----------------------------------------
+COMMAND: sed -E 's/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/XXX.XXX.XXX.XXX/g' messy.log
+OUTPUT:
+[INFO] System started
+[WARNING] Failed password for root from XXX.XXX.XXX.XXX
+Random text here
+Failed password for root from XXX.XXX.XXX.XXX
+Accepted password for admin from XXX.XXX.XXX.XXX
+ERROR: Failed password from XXX.XXX.XXX.XXX
+User login OK
+Failed password from XXX.XXX.XXX.XXX
+[ALERT] Failed password from XXX.XXX.XXX.XXX
+Noise noise noise
+Accepted login from XXX.XXX.XXX.XXX
+Failed password from XXX.XXX.XXX.XXX
+Failed password from XXX.XXX.XXX.XXX
+Failed password from XXX.XXX.XXX.XXX
+#FLAG{log_cleaning_started}
+----------------------------------------
+COMMAND: sed -E 's/Failed/[ALERT]/g; s/Accepted/[SUCCESS]/g' messy.log
+OUTPUT:
+[INFO] System started
+[WARNING] [ALERT] password for root from 192.168.1.10
+Random text here
+[ALERT] password for root from 192.168.1.10
+[SUCCESS] password for admin from 192.168.1.5
+ERROR: [ALERT] password from 10.0.0.5
+User login OK
+[ALERT] password from 10.0.0.5
+[ALERT] [ALERT] password from 10.0.0.5
+Noise noise noise
+[SUCCESS] login from 203.0.113.50
+[ALERT] password from 203.0.113.50
+[ALERT] password from 203.0.113.50
+[ALERT] password from 203.0.113.50
+#FLAG{log_cleaning_started}
+----------------------------------------
+COMMAND: tail -f messy.log
+OUTPUT:
+Failed password from 45.33.32.1
+Apr 13 08:55:12 mailserver postfix: message from hr@company.com to john@company.com
+Apr 13 08:55:20 mailserver postfix: message from attacker@evil.com to admin@company.com
+Apr 13 08:55:25 mailserver postfix: subject: URGENT Password Reset
+Apr 13 08:55:30 mailserver postfix: link: http://fake-login.com
+Apr 13 08:56:00 mailserver postfix: user admin clicked link
+#FLAG{phishing_detected}
+Apr 13 09:00:01 sshd: Failed password for root from 192.168.1.10
+Apr 13 09:00:05 sshd: Failed password for root from 192.168.1.10
+Apr 13 09:00:10 sshd: Failed password for root from 192.168.1.10
+Apr 13 09:01:15 sshd: Failed password from 10.0.0.5
+Apr 13 09:01:20 sshd: Failed password from 10.0.0.5
+Apr 13 09:02:10 sshd: Failed password from 203.0.113.50
+Apr 13 09:02:15 sshd: Failed password from 203.0.113.50
+Apr 13 09:02:20 sshd: Failed password from 203.0.113.50
+Apr 13 09:03:00 sshd: Accepted password for root from 203.0.113.50
+#FLAG{bruteforce_success}
+Apr 13 09:10:00 employee: admin accessed confidential_file.txt
+Apr 13 09:10:05 employee: admin copied confidential_file.txt to USB
+Apr 13 09:10:10 employee: admin logged out
+Apr 13 09:10:15 employee: guest accessed system
+Apr 13 09:10:20 employee: guest failed access attempt
+#FLAG{insider_activity}
+----------------------------------------
