@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Mark Dave Esto
+Cyber Handle: CipherMD
+Score: 6/10
+Rating: Junior Analyst
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{7}
+Q3: flag{203.0.113.50,10.0.0.5,192.168.1.10,192.168.1.5}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: grep flag messy.log
+Q8: flag{OUSTEROFCORRUPTOFFICIALSANDTRANSITIONGOVERNEMENTNEEDED}
+Q9: flag{Phishing-Insider}
+
+=== RESULT ===
+Status: NEEDS IMPROVEMENT
