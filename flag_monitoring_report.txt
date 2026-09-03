@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Zcythe Loresto
+Cyber Handle: Watchd09
+Score: 10/10
+Rating: SOC Analyst
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{17}
+Q3: flag{192.168.1.10,192.168.1.5,10.0.0.5,203.0.113.50,45.33.32.1}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{Yes}
+Q7: grep FLAG messy.log
+Q8: flag{ousterofcorruptofficialsandtransitiongovernmentneeded}
+Q9: flag{Phishing-Insider}
+
+=== RESULT ===
+Status: PASSED (SOC READY)
