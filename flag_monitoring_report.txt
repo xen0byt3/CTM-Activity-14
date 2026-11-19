@@ -1,0 +1,20 @@
+=== SOC FLAG REPORT ===
+
+Name: Denver Lyndon Aerol S. San Diego
+Cyber Handle: Bitstream Breaker
+Score: 6/10
+Rating: Junior Analyst
+
+=== USER ANSWERS ===
+Q1: flag{messy.log}
+Q2: flag{8}
+Q3: flag{192.168.1.10,10.0.0.5,203.0.113.50}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: grep FLAG messy.log
+Q8: flag{log_cleaning_started}
+Q9: flag{phishing-insider}
+
+=== RESULT ===
+Status: NEEDS IMPROVEMENT
